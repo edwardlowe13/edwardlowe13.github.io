@@ -12,6 +12,11 @@ body {
   font-family: "Myriad Pro", "Helvetica Neue", Helvetica;
 }
 
+#menu title {
+  text-align: right;
+  font-weight: bold;
+}
+
 #menu ul {
   list-style-type: none;
   margin: 0;
