@@ -1,26 +1,279 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="/style.css">
-  <meta charset="utf-8">
-  <title>Home · Edward Lowe</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edward Lowe</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #0f0f0d;
+      --muted: #5a5a55;
+      --rule: #d6d3cc;
+      --bg: #f7f5f0;
+      --accent: #1a6b4a0;
+      --accent-light: #f5ede7;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 40px 120px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      border-top: 3px solid var(--ink);
+      padding-top: 48px;
+      margin-bottom: 64px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(52px, 10vw, 80px);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 32px;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .tagline {
+      font-size: 17px;
+      line-height: 1.65;
+      color: var(--muted);
+      max-width: 480px;
+      font-weight: 300;
+      border-left: 2px solid var(--accent);
+      padding-left: 20px;
+      margin-bottom: 40px;
+    }
+
+    /* ── LINKS ── */
+    .links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--rule);
+      padding: 8px 18px;
+      border-radius: 100px;
+      transition: all 0.2s;
+      background: white;
+    }
+
+    .link-pill:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .link-pill svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      margin-bottom: 60px;
+    }
+
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--rule);
+    }
+
+    .about-text {
+      font-family: 'DM Serif Display', serif;
+      font-size: 26px;
+      line-height: 1.45;
+      color: var(--ink);
+      font-style: italic;
+    }
+
+    /* ── SKILLS GRID ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+    }
+
+    .skill-card {
+      background: white;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 20px 18px;
+      transition: border-color 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--accent);
+    }
+
+    .skill-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .skill-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .skill-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--rule);
+      padding-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .footer-name {
+      font-family: 'DM Serif Display', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--muted);
+    }
+
+    .footer-note {
+      font-size: 11px;
+      color: var(--rule);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    header               { animation: fadeUp 0.6s 0.00s ease both; }
+    section:nth-of-type(1) { animation: fadeUp 0.6s 0.15s ease both; }
+    section:nth-of-type(2) { animation: fadeUp 0.6s 0.25s ease both; }
+    footer               { animation: fadeUp 0.6s 0.35s ease both; }
+
+  </style>
 </head>
 <body>
-<div id="menu">
-<span class="title">Edward Lowe</span>
-<ul>
-  <li><a href="/work">Work</a></li>
-  <li><a href="/blog">Blog</a></li>
-  <li><a href="/personal">Personal</a></li>
-  <li><a href="/scrum">Scrum</a></li>
-</ul>
-</div>
-<div id="left">&nbsp;</div>
-<div id="content">
-  <img src="headshot accenture.jpg" alt="Personal Photo" style="width:150px;height:150px;">
 
-  <p>Welcome to my personal site. This site covers my professional work and personal interests.</p>
-  
-  <p>I built this website whilst I continue to explore learning to code websites. Kudos to <a href="https://patrickcollison.com/">Patrick Collision's site</a> for the inspiration.</p>
-</div>
+  <div class="page">
+
+    <header>
+      <p class="eyebrow">Principal Technical Program Manager · Amazon</p>
+      <h1>Edward <em>Lowe</em></h1>
+      <p class="tagline">I run high-impact programs with software teams that help deliver customer outcomes.</p>
+      <div class="links">
+        <a class="link-pill" href="https://www.linkedin.com/in/edward-lowe-20038b61/" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          LinkedIn
+        </a>
+        <a class="link-pill" href="mailto:edward@example.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,12 2,6"/>
+          </svg>
+          Get in touch
+        </a>
+      </div>
+    </header>
+
+    <section>
+      <p class="section-label">About</p>
+      <p class="about-text">"I bring structure and momentum to complex technical programs — bridging engineering teams and business goals to ship things that genuinely matter to customers."</p>
+    </section>
+
+    <section>
+      <p class="section-label">What I bring</p>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <span class="skill-icon">🗺</span>
+          <p class="skill-name">Program Strategy</p>
+          <p class="skill-desc">Defining roadmaps and keeping complex programs on track</p>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">🤝</span>
+          <p class="skill-name">Stakeholder Alignment</p>
+          <p class="skill-desc">Building consensus across engineering, product and leadership</p>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">⚙️</span>
+          <p class="skill-name">Technical Fluency</p>
+          <p class="skill-desc">Deep enough in the tech to ask the right questions</p>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">📦</span>
+          <p class="skill-name">Delivery</p>
+          <p class="skill-desc">Removing blockers and shipping outcomes customers feel</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <span class="footer-name">Edward Lowe</span>
+      <span class="footer-note">London · Amazon · 2026</span>
+    </footer>
+
+  </div>
+
 </body>
 </html>
