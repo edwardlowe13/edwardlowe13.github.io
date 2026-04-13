@@ -13,7 +13,7 @@
       --muted: #5a5a55;
       --rule: #d6d3cc;
       --bg: #f7f5f0;
-      --accent: #1a6b4a0;
+      --accent: #b34f20;
       --accent-light: #f5ede7;
     }
 
@@ -131,10 +131,18 @@
 
     .about-text {
       font-family: 'DM Serif Display', serif;
-      font-size: 26px;
-      line-height: 1.45;
+      font-size: 24px;
+      line-height: 1.5;
       color: var(--ink);
       font-style: italic;
+      margin-bottom: 24px;
+    }
+
+    .about-body {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 600px;
     }
 
     /* ── SKILLS GRID ── */
@@ -175,6 +183,156 @@
       line-height: 1.5;
     }
 
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 0;
+      width: 1px;
+      background: var(--rule);
+    }
+
+    .employer {
+      margin-bottom: 40px;
+    }
+
+    .employer-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 16px;
+      position: relative;
+      flex-wrap: wrap;
+    }
+
+    .employer-header::before {
+      content: '';
+      position: absolute;
+      left: -28px; top: 6px;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+
+    .employer-name {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .employer-dates {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .role {
+      margin-bottom: 16px;
+    }
+
+    .role-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .role-dates {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .role-bullets {
+      list-style: none;
+      padding: 0;
+    }
+
+    .role-bullets li {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 5px;
+    }
+
+    .role-bullets li::before {
+      content: '–';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    .role + .role {
+      border-top: 1px solid var(--rule);
+      padding-top: 14px;
+    }
+
+    /* ── WRITING ── */
+    .writing-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .writing-card {
+      background: white;
+      border: 1px solid var(--rule);
+      border-radius: 10px;
+      padding: 18px 20px;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.2s;
+    }
+
+    .writing-card:hover {
+      border-color: var(--accent);
+    }
+
+    .writing-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .writing-meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── EDUCATION ── */
+    .edu-block {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .edu-degree {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+    }
+
+    .edu-dates {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .edu-detail {
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 6px;
+      line-height: 1.6;
+    }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--rule);
@@ -205,10 +363,13 @@
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    header               { animation: fadeUp 0.6s 0.00s ease both; }
-    section:nth-of-type(1) { animation: fadeUp 0.6s 0.15s ease both; }
-    section:nth-of-type(2) { animation: fadeUp 0.6s 0.25s ease both; }
-    footer               { animation: fadeUp 0.6s 0.35s ease both; }
+    header                 { animation: fadeUp 0.6s 0.00s ease both; }
+    section:nth-of-type(1) { animation: fadeUp 0.6s 0.10s ease both; }
+    section:nth-of-type(2) { animation: fadeUp 0.6s 0.18s ease both; }
+    section:nth-of-type(3) { animation: fadeUp 0.6s 0.26s ease both; }
+    section:nth-of-type(4) { animation: fadeUp 0.6s 0.34s ease both; }
+    section:nth-of-type(5) { animation: fadeUp 0.6s 0.42s ease both; }
+    footer                 { animation: fadeUp 0.6s 0.50s ease both; }
 
   </style>
 </head>
@@ -216,16 +377,23 @@
 
   <div class="page">
 
+    <!-- ── HEADER ── -->
     <header>
       <p class="eyebrow">Principal Technical Program Manager · Amazon</p>
       <h1>Edward <em>Lowe</em></h1>
-      <p class="tagline">I run high-impact programs with software teams that help deliver customer outcomes.</p>
+      <p class="tagline">A driven program manager who has led large-scale initiatives across hyper-growth companies — building world-class teams that ship things customers feel.</p>
       <div class="links">
         <a class="link-pill" href="https://www.linkedin.com/in/edward-lowe-20038b61/" target="_blank">
           <svg viewBox="0 0 24 24" fill="currentColor">
             <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
           </svg>
           LinkedIn
+        </a>
+        <a class="link-pill" href="https://medium.com/@edwardlowe13" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/>
+          </svg>
+          Writing
         </a>
         <a class="link-pill" href="mailto:edwardlowe13@gmail.com">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -237,37 +405,197 @@
       </div>
     </header>
 
+    <!-- ── ABOUT ── -->
     <section>
       <p class="section-label">About</p>
       <p class="about-text">"I bring structure and momentum to complex technical programs — bridging engineering teams and business goals to ship things that genuinely matter to customers."</p>
+      <p class="about-body">With a career spanning Amazon, JPMorgan Chase, Babylon Health and Accenture, I specialise in building clarity out of complexity — whether that's standing up a new delivery practice, running a C-suite operating cadence, or migrating millions of customers to a new platform. I'm a Professional Scrum Master III and PRINCE2 practitioner, and I write about agile and program management on Medium, where my posts have amassed over 19,000 views.</p>
     </section>
 
+    <!-- ── WHAT I BRING ── -->
     <section>
       <p class="section-label">What I bring</p>
       <div class="skills-grid">
         <div class="skill-card">
           <span class="skill-icon">🗺</span>
           <p class="skill-name">Program Strategy</p>
-          <p class="skill-desc">Defining roadmaps and keeping complex programs on track</p>
+          <p class="skill-desc">Roadmaps, portfolio management and strategic planning at scale</p>
         </div>
         <div class="skill-card">
           <span class="skill-icon">🤝</span>
           <p class="skill-name">Stakeholder Alignment</p>
-          <p class="skill-desc">Building consensus across engineering, product and leadership</p>
+          <p class="skill-desc">Building consensus across engineering, product and C-suite leadership</p>
         </div>
         <div class="skill-card">
           <span class="skill-icon">⚙️</span>
-          <p class="skill-name">Technical Fluency</p>
-          <p class="skill-desc">Deep enough in the tech to ask the right questions</p>
+          <p class="skill-name">Agile Delivery</p>
+          <p class="skill-desc">Scrum, Kanban, SAFe — PSM III certified and PRINCE2 qualified</p>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">👥</span>
+          <p class="skill-name">Team Leadership</p>
+          <p class="skill-desc">Building and managing world-class program management teams internationally</p>
         </div>
         <div class="skill-card">
           <span class="skill-icon">📦</span>
           <p class="skill-name">Delivery</p>
-          <p class="skill-desc">Removing blockers and shipping outcomes customers feel</p>
+          <p class="skill-desc">Removing blockers and shipping outcomes that customers feel</p>
+        </div>
+        <div class="skill-card">
+          <span class="skill-icon">📊</span>
+          <p class="skill-name">Reporting & Risk</p>
+          <p class="skill-desc">Executive reporting, risk management and regulator-facing frameworks</p>
         </div>
       </div>
     </section>
 
+    <!-- ── EXPERIENCE ── -->
+    <section>
+      <p class="section-label">Experience</p>
+      <div class="timeline">
+
+        <div class="employer">
+          <div class="employer-header">
+            <span class="employer-name">Prime Video & Amazon MGM Studios</span>
+            <span class="employer-dates">Oct 2025 – Present</span>
+          </div>
+          <div class="role">
+            <p class="role-title">Principal Technical Program Manager</p>
+            <p class="role-dates">Oct 2025 – Present · London, On-site</p>
+          </div>
+        </div>
+
+        <div class="employer">
+          <div class="employer-header">
+            <span class="employer-name">JPMorgan Chase & Co.</span>
+            <span class="employer-dates">Jun 2023 – Oct 2025</span>
+          </div>
+          <div class="role">
+            <p class="role-title">Executive Director, Program Management</p>
+            <p class="role-dates">Jun 2023 – Oct 2025 · London, Hybrid</p>
+            <ul class="role-bullets">
+              <li>Led the Program Management team in Technology for Chase UK, managing four program managers and four contractors.</li>
+              <li>Established the retail bank's strategic roadmap and a common reporting framework across all 22 initiatives — prepared subsequent reporting for UK external regulators.</li>
+              <li>Migrated 2 million+ customers and 1,000+ contact centre agents to Amazon Connect Chat platform with minimal downtime.</li>
+              <li>Implemented Discover Hub, a new tab on the Chase UK app, working across 10 engineering squads, marketing and content.</li>
+              <li>Administered JIRA and Confluence for Chase UK — 1.2m pages and over 1.4m tickets.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="employer">
+          <div class="employer-header">
+            <span class="employer-name">Babylon Health</span>
+            <span class="employer-dates">Apr 2020 – Jun 2023</span>
+          </div>
+          <div class="role">
+            <p class="role-title">Director, Head of Agile Delivery</p>
+            <p class="role-dates">Jan 2023 – Jun 2023 · London, Hybrid</p>
+            <ul class="role-bullets">
+              <li>Led the agile delivery practice across Babylon — line management of 11 Agile Delivery Managers across 21 engineering teams.</li>
+              <li>Ran C-suite executive ceremonies driving key decision making for the CTO, CPO and CISO.</li>
+              <li>Created a centre of excellence that defined the operating model for agile delivery and drove more metric-driven reporting.</li>
+            </ul>
+          </div>
+          <div class="role">
+            <p class="role-title">Lead Agile Delivery Manager</p>
+            <p class="role-dates">Feb 2022 – Jan 2023 · London</p>
+            <ul class="role-bullets">
+              <li>Led six ADMs across 13 domain teams in the proactive care business department.</li>
+              <li>Delivered the MyHealth product (medical health tracking using wearables) into the US and UK markets.</li>
+              <li>Delivered Agile training for the 500+ person Product and Tech organisation.</li>
+              <li>Redefined client onboarding process to improve efficiency and achieve scale.</li>
+            </ul>
+          </div>
+          <div class="role">
+            <p class="role-title">Senior Agile Delivery Manager</p>
+            <p class="role-dates">Jun 2021 – Feb 2022 · London</p>
+            <ul class="role-bullets">
+              <li>Led redesign of the US marketing website in three months ahead of the company's IPO — increased CTA click-through by 20% and time on site by 34%.</li>
+            </ul>
+          </div>
+          <div class="role">
+            <p class="role-title">Agile Delivery Manager</p>
+            <p class="role-dates">Apr 2020 – Jun 2021 · London</p>
+            <ul class="role-bullets">
+              <li>Rolled out new CRM to Canada, US and Singapore, supporting communications with over 2 million new customers.</li>
+              <li>Procured and migrated the entire company to a new enterprise content tooling stack, deprecating the previous vendor.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="employer">
+          <div class="employer-header">
+            <span class="employer-name">Accenture</span>
+            <span class="employer-dates">May 2016 – Apr 2020</span>
+          </div>
+          <div class="role">
+            <p class="role-title">Technology Consultant</p>
+            <p class="role-dates">Dec 2018 – Apr 2020 · London</p>
+            <ul class="role-bullets">
+              <li>Scrum Master / Agile Coach for Android app development across 5,000+ stores for an S&P 500 Off-Price Fashion Retailer, using SAFe.</li>
+              <li>Delivered the first Azure PaaS application at an S&P 500 Retailer — achieved 25% cost saving by automating the allocation process.</li>
+              <li>Trained 50+ individuals in SAFe methodology; qualified to teach Product Owner, Scrum Master and LPM.</li>
+            </ul>
+          </div>
+          <div class="role">
+            <p class="role-title">Management Consulting Analyst</p>
+            <p class="role-dates">May 2016 – Nov 2018 · London</p>
+            <ul class="role-bullets">
+              <li>Managed IT rollout across 100 stores and 200 Click & Collect points for a FTSE 100 retailer — those stores performed 9.8% above average.</li>
+              <li>Developed Tableau dashboards for the RBS 6 Nations, used by The Telegraph, The Times and the BBC.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="employer">
+          <div class="employer-header">
+            <span class="employer-name">Vitalite Group</span>
+            <span class="employer-dates">Jan 2016 – Apr 2016</span>
+          </div>
+          <div class="role">
+            <p class="role-title">Strategy and Finance Advisor</p>
+            <p class="role-dates">Jan 2016 – Apr 2016 · Zambia (DfID scheme)</p>
+            <ul class="role-bullets">
+              <li>Strategy advisor for a social enterprise bringing affordable solar power to Zambia's poorest areas.</li>
+              <li>Helped achieve a $2m funding round, enabling Vitalite to expand to more areas of the country.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── WRITING ── -->
+    <section>
+      <p class="section-label">Writing</p>
+      <div class="writing-grid">
+        <a class="writing-card" href="https://medium.com/@edwardlowe13" target="_blank">
+          <p class="writing-title">Medium — Agile, Delivery & Program Management</p>
+          <p class="writing-meta">19,000+ views · Articles on agile culture at Spotify, Tesla, Riot Games and more</p>
+        </a>
+        <a class="writing-card" href="https://medium.com/serious-scrum/why-quarterly-planning-is-the-perfect-event-to-create-a-product-goal-fcbfb3dbff67" target="_blank">
+          <p class="writing-title">Why Quarterly Planning is the Perfect Event to Set a Product Goal</p>
+          <p class="writing-meta">Serious Scrum · 16,000+ subscriber publication</p>
+        </a>
+        <a class="writing-card" href="https://www.thersa.org/comment/2022/11/an-idea-worth-stealing" target="_blank">
+          <p class="writing-title">An Idea Worth Stealing — Adopting Software Ways of Working</p>
+          <p class="writing-meta">Royal Society of Arts</p>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── EDUCATION ── -->
+    <section>
+      <p class="section-label">Education</p>
+      <div class="edu-block">
+        <span class="edu-degree">MA Economics & Management, University of Oxford</span>
+        <span class="edu-dates">2012 – 2015</span>
+      </div>
+      <p class="edu-detail">St Hilda's College · 2.i Honours · Member of the Saïd Business School, completing modules in strategy, accounting, marketing, statistics and econometrics. Honorary Masters provided post graduation.</p>
+    </section>
+
+    <!-- ── FOOTER ── -->
     <footer>
       <span class="footer-name">Edward Lowe</span>
       <span class="footer-note">London · Amazon · 2026</span>
