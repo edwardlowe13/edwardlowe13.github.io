@@ -425,7 +425,44 @@
     font-size: 12px;
     padding: 7px 14px;
   }
+  
+   .header-inner {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 24px;
+  }
 
+  .header-photo img {
+    width: 100px;
+    height: 100px;
+  }
+
+}
+
+ /* ── HEADER PHOTO ── */
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+}
+
+.header-text {
+  flex: 1;
+}
+
+.header-photo {
+  flex-shrink: 0;
+}
+
+.header-photo img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 3px solid var(--rule);
+  display: block;
 }
 
   </style>
@@ -436,9 +473,11 @@
 
     <!-- ── HEADER ── -->
     <header>
+  <div class="header-inner">
+    <div class="header-text">
       <p class="eyebrow">Principal Technical Program Manager · Amazon</p>
       <h1>Edward <em>Lowe</em></h1>
-      <p class="tagline">A driven technical program manager who has led large-scale initiatives for high-growth companies in a range of sectors.</p>
+      <p class="tagline">A driven program manager who has led large-scale initiatives across hyper-growth companies — building world-class teams that ship things customers feel.</p>
       <div class="links">
         <a class="link-pill" href="https://www.linkedin.com/in/edward-lowe-20038b61/" target="_blank">
           <svg viewBox="0 0 24 24" fill="currentColor">
@@ -460,7 +499,12 @@
           Get in touch
         </a>
       </div>
-    </header>
+    </div>
+    <div class="header-photo">
+      <img src="edward.png" alt="Edward Lowe">
+    </div>
+  </div>
+</header>
 
     <!-- ── ABOUT ── -->
     <section>
