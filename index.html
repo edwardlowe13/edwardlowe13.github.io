@@ -425,6 +425,27 @@
       letter-spacing: 0.05em;
     }
 
+    .footer-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.footer-built {
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.footer-built a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.footer-built a:hover {
+  text-decoration: underline;
+}
+
     /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
@@ -792,9 +813,12 @@
 
     <!-- ── FOOTER ── -->
     <footer>
-      <span class="footer-name">Edward Lowe</span>
-      <span class="footer-note">London · Amazon · 2026</span>
-    </footer>
+  <span class="footer-name">Edward Lowe</span>
+  <div class="footer-right">
+    <span class="footer-note">London · Amazon · 2026</span>
+    <span class="footer-built">Built with <a href="https://claude.ai" target="_blank">Claude</a></span>
+  </div>
+</footer>
 
   </div>
 
