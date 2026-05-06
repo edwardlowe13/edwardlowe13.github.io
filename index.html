@@ -28,9 +28,9 @@
 
 <!-- ── TWITTER/X CARD ── -->
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Edward Lowe — Principal TPM at Amazon">
+<meta name="twitter:title" content="Edward Lowe — Principal Technical Program Manager at Amazon">
 <meta name="twitter:description" content="Program manager specialising in large-scale technical delivery across Amazon, JPMorgan Chase and Babylon Health.">
-<meta name="twitter:image" content="https://edwardlowe.co.uk/edward.jpg">
+<meta name="twitter:image" content="https://edwardlowe.co.uk/edward.jpeg">
 
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
@@ -210,6 +210,46 @@
       color: var(--muted);
       line-height: 1.5;
     }
+
+    /* ── NOW ── */
+.now-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.now-card {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 20px 18px;
+  transition: border-color 0.2s;
+}
+
+.now-card:hover {
+  border-color: var(--accent);
+}
+
+.now-icon {
+  font-size: 22px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.now-category {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.now-text {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
 
     /* ── TIMELINE ── */
     .timeline {
@@ -579,6 +619,28 @@
       </div>
     </section>
 
+    <!-- ── NOW ── -->
+<section>
+  <p class="section-label">Now</p>
+  <div class="now-grid">
+    <div class="now-card">
+      <span class="now-icon">🎬</span>
+      <p class="now-category">Working on</p>
+      <p class="now-text">Three programs within Prime Video focused on improving the customer experience. Details to follow.</p>
+    </div>
+    <div class="now-card">
+      <span class="now-icon">🤖</span>
+      <p class="now-category">Learning</p>
+      <p class="now-text">Deepening my understanding of AI — improving my coding skills through projects like this site, and building AI agents to improve productivity at work.</p>
+    </div>
+    <div class="now-card">
+      <span class="now-icon">📖</span>
+      <p class="now-category">Reading</p>
+      <p class="now-text">Artemis by Andy Weir — inspired by Project Hail Mary, which I loved.</p>
+    </div>
+  </div>
+</section>
+    
     <!-- ── EXPERIENCE ── -->
     <section>
       <p class="section-label">Experience</p>
