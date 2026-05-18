@@ -36,6 +36,55 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* ── DARK MODE COLOURS ── */
+html.dark {
+  --ink: #f0ede8;
+  --muted: #9e9a94;
+  --rule: #2e2c28;
+  --bg: #1a1916;
+  --accent: #d4713a;
+  --accent-light: #2a1f18;
+}
+
+html.dark body {
+  background: var(--bg);
+}
+
+html.dark .skill-card,
+html.dark .now-card,
+html.dark .writing-card,
+html.dark .link-pill {
+  background: #222018;
+}
+
+/* ── TOGGLE BUTTON ── */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  background: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.2s;
+  z-index: 100;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  transform: scale(1.1);
+}
+
+html.dark .theme-toggle {
+  background: #222018;
+}
+
     :root {
       --ink: #0f0f0d;
       --muted: #5a5a55;
@@ -560,6 +609,11 @@
 
   <div class="page">
 
+<!-- ── DARK MODE TOGGLE ── -->
+<button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+  <span class="theme-icon">🌙</span>
+</button>
+
     <!-- ── HEADER ── -->
     <header>
   <div class="header-inner">
@@ -821,6 +875,28 @@
 </footer>
 
   </div>
+<script>
+  // Toggle between light and dark mode
+  function toggleTheme() {
+    const html = document.documentElement;
+    const icon = document.querySelector('.theme-icon');
 
+    if (html.classList.contains('dark')) {
+      html.classList.remove('dark');
+      icon.textContent = '🌙';
+      localStorage.setItem('theme', 'light');
+    } else {
+      html.classList.add('dark');
+      icon.textContent = '☀️';
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+
+  // Remember preference on page load
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.classList.add('dark');
+    document.querySelector('.theme-icon').textContent = '☀️';
+  }
+</script>
 </body>
 </html>
