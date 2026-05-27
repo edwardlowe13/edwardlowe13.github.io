@@ -509,6 +509,107 @@ html.dark .theme-toggle {
     section:nth-of-type(5) { animation: fadeUp 0.6s 0.42s ease both; }
     footer                 { animation: fadeUp 0.6s 0.50s ease both; }
 
+   /* ── READING LIST ── */
+.reading-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.reading-filter {
+  padding: 7px 16px;
+  border-radius: 100px;
+  border: 1px solid var(--rule);
+  background: white;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.reading-filter.active {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.reading-filter:hover:not(.active) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.reading-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+}
+
+.reading-loading {
+  font-size: 13px;
+  color: var(--muted);
+  grid-column: 1 / -1;
+}
+
+.book-card {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 18px;
+  transition: border-color 0.2s;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.book-card:hover {
+  border-color: var(--accent);
+}
+
+.book-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.book-author {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.book-rating {
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 1px;
+}
+
+.book-review {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+  font-style: italic;
+  border-left: 2px solid var(--rule);
+  padding-left: 10px;
+  margin-top: 4px;
+}
+
+.book-year {
+  font-size: 11px;
+  color: var(--rule);
+  margin-top: auto;
+}
+
+html.dark .reading-filter {
+  background: #222018;
+}
+
+html.dark .book-card {
+  background: #222018;
+}
+
     /* ── MOBILE ── */
 @media (max-width: 600px) {
 
@@ -865,6 +966,19 @@ html.dark .theme-toggle {
       <p class="edu-detail">St Hilda's College · 2.i Honours · Member of the Saïd Business School, completing modules in strategy, accounting, marketing, statistics and econometrics. Honorary Masters provided post graduation.</p>
     </section>
 
+    <!-- ── READING LIST ── -->
+<section>
+  <p class="section-label">Reading</p>
+  <div class="reading-filters">
+    <button class="reading-filter active" onclick="filterBooks('currently-reading')">Currently Reading</button>
+    <button class="reading-filter" onclick="filterBooks('read')">Recently Read</button>
+    <button class="reading-filter" onclick="filterBooks('to-read')">Want to Read</button>
+  </div>
+  <div class="reading-grid" id="reading-grid">
+    <div class="reading-loading">Loading books...</div>
+  </div>
+</section>
+
     <!-- ── FOOTER ── -->
     <footer>
   <span class="footer-name">Edward Lowe</span>
@@ -876,7 +990,7 @@ html.dark .theme-toggle {
 
   </div>
 <script>
-  // Toggle between light and dark mode
+  // ── DARK MODE ──────────────────────────────────────────
   function toggleTheme() {
     const html = document.documentElement;
     const icon = document.querySelector('.theme-icon');
@@ -892,11 +1006,134 @@ html.dark .theme-toggle {
     }
   }
 
-  // Remember preference on page load
   if (localStorage.getItem('theme') === 'dark') {
     document.documentElement.classList.add('dark');
     document.querySelector('.theme-icon').textContent = '☀️';
   }
+
+  // ── READING LIST ───────────────────────────────────────
+
+  // Step 1: store all books once fetched
+  let allBooks = [];
+
+  // Step 2: the URL of your Google Sheet CSV
+  const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSNGeotkQS_K_96BHApo66NVQezzJ7fOQiGi_mXwgUbl_HB-oelf5ZeIVixI7EcBHcHgT9_2vTUTyTF/pub?gid=0&single=true&output=csv';
+
+  // Step 3: fetch the CSV when the page loads
+  fetch(SHEET_URL)
+    .then(function(response) {
+      return response.text();
+    })
+    .then(function(csvText) {
+      allBooks = parseCSV(csvText);
+      filterBooks('currently-reading');
+    })
+    .catch(function(error) {
+      document.getElementById('reading-grid').innerHTML =
+        '<p class="reading-loading">Could not load books right now.</p>';
+    });
+
+  // Step 4: parse the CSV text into an array of book objects
+  function parseCSV(csvText) {
+    const lines = csvText.split('\n');
+    const headers = lines[0].split(',');
+    const books = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const values = splitCSVLine(lines[i]);
+      if (values.length < 2) continue;
+
+      const book = {};
+      for (let j = 0; j < headers.length; j++) {
+        book[headers[j].trim()] = (values[j] || '').trim();
+      }
+      books.push(book);
+    }
+
+    return books;
+  }
+
+  // Step 5: handle commas inside quoted CSV fields
+  function splitCSVLine(line) {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      if (char === '"') {
+        inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        result.push(current);
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    result.push(current);
+    return result;
+  }
+
+  // Step 6: filter and display books by shelf
+  function filterBooks(shelf) {
+
+    // update which button looks active
+    document.querySelectorAll('.reading-filter').forEach(function(btn) {
+      btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+
+    // filter the books array
+    let filtered = allBooks.filter(function(book) {
+      return book['Exclusive Shelf'] === shelf;
+    });
+
+    // for recently read, sort by date and take top 12
+    if (shelf === 'read') {
+      filtered = filtered
+        .filter(function(book) { return book['Date Read'] !== ''; })
+        .sort(function(a, b) {
+          return new Date(b['Date Read']) - new Date(a['Date Read']);
+        })
+        .slice(0, 12);
+    }
+
+    // build the HTML
+    const grid = document.getElementById('reading-grid');
+
+    if (filtered.length === 0) {
+      grid.innerHTML = '<p class="reading-loading">No books here yet.</p>';
+      return;
+    }
+
+    grid.innerHTML = filtered.map(function(book) {
+      const stars = renderStars(book['My Rating']);
+      const review = book['My Review']
+        ? '<p class="book-review">' + book['My Review'].replace(/<[^>]+>/g, '') + '</p>'
+        : '';
+      const year = book['Date Read']
+        ? '<p class="book-year">Read ' + book['Date Read'].substring(0, 4) + '</p>'
+        : '';
+
+      return '<div class="book-card">' +
+        '<p class="book-title">' + book['Title'] + '</p>' +
+        '<p class="book-author">' + book['Author'] + '</p>' +
+        stars +
+        review +
+        year +
+        '</div>';
+    }).join('');
+  }
+
+  // Step 7: turn a number rating into star emojis
+  function renderStars(rating) {
+    const num = parseInt(rating);
+    if (!num || num === 0) return '';
+    const filled = '★'.repeat(num);
+    const empty = '☆'.repeat(5 - num);
+    return '<p class="book-rating">' + filled + empty + '</p>';
+  }
+
 </script>
 </body>
 </html>
