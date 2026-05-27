@@ -1026,7 +1026,10 @@ html.dark .book-card {
     })
     .then(function(csvText) {
       allBooks = parseCSV(csvText);
-      filterBooks('currently-reading');
+console.log('Total books loaded:', allBooks.length);
+console.log('First book:', allBooks[0]);
+console.log('Shelves found:', allBooks.map(b => b['Exclusive Shelf']));
+filterBooks('currently-reading');
     })
     .catch(function(error) {
       document.getElementById('reading-grid').innerHTML =
