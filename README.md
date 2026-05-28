@@ -1,2 +1,2 @@
 # edwardlowe13.github.io
-My first personal portfolio site that I have written the code for myself. Using Github Pages.
+"I built this site from scratch as a hands-on way to learn how the web works. Starting with no coding experience, I wrote the HTML, CSS and JavaScript myself — learning as I went by building real features: a timeline, a dark mode toggle, a live reading list powered by a Google Sheet, and a full deployment pipeline using Git and GitHub Pages. The whole thing was built in collaboration with Claude, which I used as a coding tutor and pair programmer rather than just asking it to write the code for me."
