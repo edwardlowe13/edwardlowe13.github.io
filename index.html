@@ -970,9 +970,9 @@ html.dark .book-card {
 <section>
   <p class="section-label">Reading</p>
   <div class="reading-filters">
-    <button class="reading-filter active" onclick="filterBooks('currently-reading')">Currently Reading</button>
-    <button class="reading-filter" onclick="filterBooks('read')">Recently Read</button>
-    <button class="reading-filter" onclick="filterBooks('to-read')">Want to Read</button>
+    <button class="reading-filter" onclick="filterBooks('currently-reading', this)">Currently Reading</button>
+<button class="reading-filter active" onclick="filterBooks('read', this)">Recently Read</button>
+<button class="reading-filter" onclick="filterBooks('to-read', this)">Want to Read</button>
   </div>
   <div class="reading-grid" id="reading-grid">
     <div class="reading-loading">Loading books...</div>
@@ -1021,20 +1021,21 @@ html.dark .book-card {
 
   // Step 3: fetch the CSV when the page loads
   fetch(SHEET_URL)
-    .then(function(response) {
-      return response.text();
-    })
-    .then(function(csvText) {
-      allBooks = parseCSV(csvText);
-console.log('Total books loaded:', allBooks.length);
-console.log('First book:', allBooks[0]);
-console.log('Shelves found:', allBooks.map(b => b['Exclusive Shelf']));
-filterBooks('currently-reading');
-    })
-    .catch(function(error) {
-      document.getElementById('reading-grid').innerHTML =
-        '<p class="reading-loading">Could not load books right now.</p>';
-    });
+  .then(function(response) {
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    return response.text();
+  })
+  .then(function(csvText) {
+    allBooks = parseCSV(csvText);
+    filterBooks('read');
+  })
+  .catch(function(error) {
+    console.log('Fetch error:', error);
+    document.getElementById('reading-grid').innerHTML =
+      '<p class="reading-loading">Could not load books right now.</p>';
+  });
 
   // Step 4: parse the CSV text into an array of book objects
   function parseCSV(csvText) {
@@ -1078,13 +1079,20 @@ filterBooks('currently-reading');
   }
 
   // Step 6: filter and display books by shelf
-  function filterBooks(shelf) {
-
-    // update which button looks active
+  function filterBooks(shelf, clickedBtn) {
+  document.querySelectorAll('.reading-filter').forEach(function(btn) {
+    btn.classList.remove('active');
+  });
+  
+  if (clickedBtn) {
+    clickedBtn.classList.add('active');
+  } else {
     document.querySelectorAll('.reading-filter').forEach(function(btn) {
-      btn.classList.remove('active');
+      if (btn.textContent.trim() === 'Recently Read') {
+        btn.classList.add('active');
+      }
     });
-    event.target.classList.add('active');
+  }
 
     // filter the books array
     let filtered = allBooks.filter(function(book) {
